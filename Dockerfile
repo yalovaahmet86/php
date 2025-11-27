@@ -6,7 +6,11 @@ WORKDIR /var/www/html
 # Projedeki tüm dosyaları kopyala
 COPY . .
 
-# Apache'yi yapılandır (gerekirse)
+# Dosya izinlerini düzelt (ÖNEMLİ!)
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
+
+# Apache'yi yapılandır
 RUN a2enmod rewrite
 
 # Port 80'i aç
